@@ -17,6 +17,8 @@ class BmiResultScreen extends StatelessWidget {
       category = underweightMild;
     } else if (bmiValue < 25.0) {
       category = normal;
+    } else if (bmiValue < 30) {
+      category = overWeight;
     } else if (bmiValue < 35) {
       category = obeseI;
     } else if (bmiValue < 40) {
@@ -27,8 +29,34 @@ class BmiResultScreen extends StatelessWidget {
     return category;
   }
 
+  String saranBmi(String categoryName) {
+    String desc = "";
+    switch (categoryName) {
+      case underweightSevere:
+      case underweightModerate:
+      case underweightMild:
+        desc = "Possible nutritional deficiency and osteoporosis";
+        break;
+      case normal:
+        desc = "Low Risk (healty range).";
+        break;
+      case overWeight:
+        desc = "Moderate risk of developing heart disease, high blood pressure";
+        break;
+      case obeseI:
+      case obeseII:
+      case obeseIII:
+        desc = "High risk of developing heart disease, high blood pressure";
+        break;
+      default:
+    }
+    return desc;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bmiCategories = bmiCategory(bmi);
+    final bmiDesc = saranBmi(bmiCategories);
     return Scaffold(
       appBar: AppBar(
         title: Text("Hasil Hitung BMI"),
@@ -52,11 +80,12 @@ class BmiResultScreen extends StatelessWidget {
             flex: 5,
             child: BmiCard(
               child: Container(
+                width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Column(
                   children: [
                     Text(
-                      bmiCategory(bmi),
+                      bmiCategories,
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -70,7 +99,7 @@ class BmiResultScreen extends StatelessWidget {
                           color: Colors.white),
                     ),
                     Text(
-                      "$category",
+                      bmiDesc,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20,
