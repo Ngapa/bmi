@@ -1,4 +1,5 @@
 import 'package:bmi/contains/constans.dart';
+import 'package:bmi/helpers/bmi_calculator.dart';
 import 'package:bmi/views/bmi_result_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,16 +17,6 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
   int weight = 30;
   int age = 20;
   String? gender;
-
-  double hitungBMI() {
-    double heighInMeter = height / 100;
-
-    // final pow(height, 2)
-    final h = (heighInMeter * heighInMeter);
-    final bmi = weight / h;
-
-    return bmi;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +116,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       children: [
                         Text(
                           "Berat Badan",
-                          style: numberTextStyle,
+                          style: labelTextStyle,
                         ),
                         Text(
                           "$weight",
@@ -135,6 +126,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           height: 8,
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             RawMaterialButton(
                               onPressed: () {
@@ -179,7 +171,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                       children: [
                         Text(
                           "Umur",
-                          style: numberTextStyle,
+                          style: labelTextStyle,
                         ),
                         Text(
                           "$age",
@@ -189,6 +181,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           height: 8,
                         ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             RawMaterialButton(
                               onPressed: () {
@@ -231,10 +224,13 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
           ),
           GestureDetector(
             onTap: () {
+              final bmiCalculator =
+                  BmiCalculator(height: height, weight: weight);
+              bmiCalculator.hitungBMI();
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: ((context) {
-                    return BmiResultScreen(bmi: hitungBMI());
+                    return BmiResultScreen(bmi: bmiCalculator.bmi!);
                   }),
                 ),
               );
@@ -276,7 +272,7 @@ class BmiCard extends StatelessWidget {
           color: const Color(0xff272a4e),
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: borderColor!)),
-      margin: const EdgeInsets.all(15),
+      margin: const EdgeInsets.all(10),
       child: child,
     );
   }
