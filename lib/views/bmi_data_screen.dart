@@ -29,6 +29,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
         children: [
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: GestureDetector(
@@ -49,12 +50,12 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      gender = "male";
+                      gender = "female";
                       setState(() {});
                     },
                     child: BmiCard(
                       borderColor:
-                          (gender == "male") ? Colors.white : primaryColor,
+                          (gender == "female") ? Colors.white : primaryColor,
                       child: const GenderIconText(
                         icon: Icons.female,
                         title: 'Female',
@@ -126,7 +127,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           height: 8,
                         ),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
                               onPressed: () {
@@ -181,7 +182,7 @@ class _BmiDataScreenState extends State<BmiDataScreen> {
                           height: 8,
                         ),
                         Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RawMaterialButton(
                               onPressed: () {

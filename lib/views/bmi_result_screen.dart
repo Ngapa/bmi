@@ -36,7 +36,7 @@ class BmiResultScreen extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -75,7 +75,7 @@ class BmiResultScreen extends StatelessWidget {
               color: const Color(0xffec3c66),
               child: const Center(
                 child: Text(
-                  "Hitung BMI",
+                  "Hitung Ulang BMI",
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
